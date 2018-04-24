@@ -1,5 +1,6 @@
 package com.integration.test.service;
 
 public interface HelloService {
-    public void hello(String name);
+    void hello(String name);
+    String getHelloMessage(String name);
 }

@@ -14,7 +14,11 @@
     <channel id="helloWorldChannel" />
 
     <!-- A Spring Integration adapter that routes messages sent to the helloWorldChannel to the bean named "helloServiceImpl"'s hello() method -->
-    <!--这是一个适配器 指示所有发送到通道的请求都转发到helloServiceImpl中的hello()方法中-->
-    <service-activator input-channel="helloWorldChannel" ref="helloServiceImpl" method="hello" />
+    <!--这是一个适配器 指示所有发送到通道的请求都转发到helloServiceImpl中的getHelloMessage()方法中-->
+    <!--<service-activator input-channel="helloWorldChannel" ref="helloServiceImpl" method="hello" />-->
+    <service-activator input-channel="helloWorldChannel" ref="helloServiceImpl" method="getHelloMessage" />
+    <!-- Define a gateway that we can use to capture a return value -->
+    <!--这是一个网关节点 网关节点是一个接口定义的 这样我们可以拿到helloServiceImpl中的返回值-->
+    <gateway id="helloWorldGateway" service-interface="com.integration.test.service.HelloService" default-request-channel="helloWorldChannel" />
 
 </beans:beans>
