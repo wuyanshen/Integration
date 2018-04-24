@@ -8,10 +8,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GreeterServiceImpl implements GreeterService {
+
+//    注入一个消息通道
     @Autowired
     private MessageChannel helloWorldChannel;
     @Override
     public void greet(String name) {
-        helloWorldChannel.send( MessageBuilder.withPayload( name ).build() );
+        helloWorldChannel.send(
+                                MessageBuilder //用MessageBuilder创建一个消息发送给MessageChannel
+                                .withPayload( name )
+                                .setHeader("xiaoMing","xiaoMing")
+                                .build()
+                            );
     }
 }
