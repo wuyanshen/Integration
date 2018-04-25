@@ -43,9 +43,8 @@ message-producers 消息生产者  message-consumers 消息消费者
 	2.publish-subscribe 发布-订阅通道 ：  所有订阅者都可以接收到消息
 ## pollable channel 轮询通道
 	具有在一个队列中缓冲消息的能力
-## service activator 激活器 适配器
 
-##消息端点：
+## 消息端点：
 	1.Transformer 转化器
 	可以将payload(消息负载)转化成其他格式，比如json转xml、xml转json
 	2.Filter 过滤器
