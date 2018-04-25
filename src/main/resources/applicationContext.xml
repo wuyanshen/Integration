@@ -21,4 +21,5 @@
     <!--这是一个网关节点 网关节点是一个接口定义的 这样我们可以拿到helloServiceImpl中的返回值-->
     <int:gateway id="helloWorldGateway" service-interface="com.integration.test.service.HelloService" default-request-channel="helloWorldChannel" />
 
+
 </beans:beans>
