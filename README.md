@@ -7,7 +7,7 @@
 ## 一个Spring Integration入门的文章
 [文章地址](http://www.importnew.com/16538.html)
 
-#企业消息总线学习资料
+## 企业消息总线学习资料
 
 [EIP——Spring Integration4.3使用篇](https://blog.csdn.net/xiayutai1/article/details/53302652?locationNum=4&fps=1)
 
@@ -15,7 +15,7 @@
 
 [SpringWS环境搭建](https://www.cnblogs.com/hippo0918/p/3662587.html)
 
-简书--马国标
+### 简书--马国标
 1.[Spring integration 基本概念](https://www.jianshu.com/p/bf1643539f99)
 
 2.[Spring Integration Message](https://www.jianshu.com/p/8d2481cfb20c)
