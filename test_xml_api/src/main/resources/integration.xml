@@ -14,13 +14,16 @@
     <!--<context:component-scan base-package="com.integration.xml.xml_api" />-->
 
     <int:channel id="requestChannel" />
-    <int:channel id="outputChannel"/>
+    <int:channel id="outputChannel">
+        <int:queue capacity="10"/>
+    </int:channel>
     <!--<int-http:inbound-gateway request-channel="requestChannel" reply-channel="outputChannel"
                               path="/welcome/{name}"
                               supported-methods="GET"
                               payload-expression="#pathVariables.name">
         <int-http:request-mapping consumes="application/json" produces="application/json"/>
     </int-http:inbound-gateway>-->
+    <int-http:outbound-gateway http-method="GET" url="http://localhost:8080/getMsg" request-channel="requestChannel" reply-channel="outputChannel" />
     <int:service-activator ref="welcomeEndpoint"
                                method="get" input-channel="requestChannel" output-channel="outputChannel" />
 
