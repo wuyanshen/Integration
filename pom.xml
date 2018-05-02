@@ -45,6 +45,15 @@
 			</plugin>
 		</plugins>
 	</build>
-
+<modules>
+	<module>axis2_api</module>
+	<module>cxf_api</module>
+	<module>elibus/message-service-bus</module>
+	<module>java_api</module>
+	<module>jms_api</module>
+	<module>ws_api</module>
+	<module>xml_api</module>
+	<module>test_xml_api</module>
+</modules>
 
 </project>
