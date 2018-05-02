@@ -1,0 +1,34 @@
+package com.integration.xml.xml_api.test;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
+@Component
+public class WelcomeEndpoint {
+    private Logger log = LoggerFactory.getLogger(this.getClass().getName());
+
+    public Message<?> get(Message<String> msg){
+        String name = msg.getPayload();
+        log.info("Request with name ="+name);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String currentTime = dtf.format(now);
+        String strMsg = "Hello "+name+"! "+" Welcome to Spring Integration";
+
+        HelloMsg retrunMsg = new HelloMsg(strMsg,currentTime);
+
+        return MessageBuilder.withPayload(retrunMsg)
+                .copyHeadersIfAbsent(msg.getHeaders())
+                .setHeader("http_statusCode", HttpStatus.OK)
+                .build();
+    }
+}
