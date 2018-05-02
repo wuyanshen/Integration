@@ -4,6 +4,8 @@ import com.integration.xml.xml_api.entity.MyParam;
 import org.springframework.messaging.Message;
 
 public interface MsgChannel {
-    boolean rep(String requestXML);
+    String rep();
 //    Message<MyParam> transforParam(Message<?> inMessage);
+    void req(String requestXML);
+
 }

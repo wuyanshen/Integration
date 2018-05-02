@@ -51,10 +51,10 @@
 
     <!--<int:gateway id="helloGateWay" service-interface="com.integration.xml.xml_api.gateway.HelloGateWay" default-request-channel="input" />-->
     <int-http:inbound-gateway request-channel="receiveChannel"
-                              path="/receiveGateway"
+                              path="/CommonService"
                               supported-methods="POST,GET"/>
     <int-http:outbound-gateway request-channel="input"
-                               url="http://localhost:8088/receiveGateway"
+                               url="http://localhost:8092/services/CommonService"
                                http-method="GET"
                                expected-response-type="java.lang.String"/>
     <int:chain input-channel="receiveChannel">

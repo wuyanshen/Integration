@@ -3,10 +3,12 @@ package com.integration.xml.xml_api.service.impl;
 import com.integration.xml.xml_api.entity.MyParam;
 import com.integration.xml.xml_api.service.MsgChannel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.integration.annotation.MessageEndpoint;
 import org.springframework.integration.annotation.Transformer;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -17,11 +19,20 @@ import java.util.LinkedList;
 public class MsgChannelImpl implements MsgChannel{
 
     @Autowired
-    private MessageChannel messageChannel;
+    private MessageChannel input;
+
+    @Autowired
+    private PollableChannel output;
 
     @Override
-    public boolean rep(String requestXML) {
-         return messageChannel.send(MessageBuilder
+    public String rep() {
+        String payload = output.receive(21).getPayload().toString();
+        return payload;
+    }
+
+    @Override
+    public void req(String requestXML) {
+        input.send(MessageBuilder
                 .withPayload(requestXML)
                 .setHeader("name","123")
                 .build());

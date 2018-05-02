@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>请求webService</title>
+</head>
+<body>
+    <h2>请求WebService</h2>
+    <form action="/getRep" method="post">
+        <table>
+            <tr>
+                <td>
+                    请求url：<textarea th:text="${url}" style="width: 380px;height: 20px;" name="url"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    请求报文：<textarea th:text="${requestXML}" style="width: 370px;height: 200px;" name="requestXML"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="请求">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <h2>WebService返回的报文</h2>
+    <textarea style="width: 460px;height: 300px;" th:text="${result}"></textarea>
+</body>
+</html>

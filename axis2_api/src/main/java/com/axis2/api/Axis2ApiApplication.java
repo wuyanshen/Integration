@@ -45,8 +45,8 @@ public class Axis2ApiApplication extends SpringBootServletInitializer {
 
 	@Bean
     public ApplicationContextHolder getApplicationContext(){
-		ApplicationContextHolder applicationContextHolder=new ApplicationContextHolder();
-		return applicationContextHolder;
-	}
+        ApplicationContextHolder applicationContextHolder=new ApplicationContextHolder();
+        return applicationContextHolder;
+    }
 
 }
