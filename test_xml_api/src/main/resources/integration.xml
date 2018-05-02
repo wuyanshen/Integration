@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:int="http://www.springframework.org/schema/integration"
+             xmlns:int-http="http://www.springframework.org/schema/integration/http"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                 http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/integration
+                                 http://www.springframework.org/schema/integration/spring-integration.xsd
+                                 http://www.springframework.org/schema/integration/http
+                                 http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
+
+    <!-- Component scan to find all Spring components -->
+    <!--<context:component-scan base-package="com.integration.xml.xml_api" />-->
+
+    <int:channel id="requestChannel" />
+    <int:channel id="outputChannel">
+        <int:queue capacity="10"/>
+    </int:channel>
+    <!--<int-http:inbound-gateway request-channel="requestChannel" reply-channel="outputChannel"
+                              path="/welcome/{name}"
+                              supported-methods="GET"
+                              payload-expression="#pathVariables.name">
+        <int-http:request-mapping consumes="application/json" produces="application/json"/>
+    </int-http:inbound-gateway>-->
+    <int-http:outbound-gateway http-method="GET" url="http://localhost:8080/getMsg" request-channel="requestChannel" reply-channel="outputChannel" />
+    <int:service-activator ref="welcomeEndpoint"
+                               method="get" input-channel="requestChannel" output-channel="outputChannel" />
+
+</beans:beans>
