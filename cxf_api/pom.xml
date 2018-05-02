@@ -30,11 +30,22 @@
 			<artifactId>spring-boot-starter-integration</artifactId>
 		</dependency>
 		<!-- CXF webservice -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
-			<version>3.1.11</version>
-		</dependency>
+			&lt;!&ndash;<version>3.1.11</version>&ndash;&gt;
+			<version>2.6.1</version>
+		</dependency>-->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>3.1.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>3.1.8</version>
+        </dependency>
 		<!-- CXF webservice -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
