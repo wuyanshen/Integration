@@ -17,7 +17,8 @@
 	<int:channel id="wsinputChannel" />
 
 	<chain input-channel="wsinputChannel" output-channel="output">
-		<ws:outbound-gateway uri="{reqUrl}">
+		<transformer ref="esbTransformer" method="json2xml"/>
+		<ws:outbound-gateway uri="{reqUrl}" >
 			<ws:uri-variable name="reqUrl" expression="headers.soapUrl"/>
 		</ws:outbound-gateway>
         <transformer ref="esbTransformer" method="xml2json"/>

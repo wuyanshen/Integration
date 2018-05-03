@@ -2,8 +2,17 @@ package com.elisoft.servicebus.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import net.javacrumbs.json2xml.JsonXmlReader;
 import org.dom4j.*;
+import org.xml.sax.InputSource;
 
+import javax.xml.transform.Result;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.ByteArrayOutputStream;
+import java.io.StringReader;
 import java.util.List;
 
 public class Xml2JsonUtil {
@@ -76,6 +85,24 @@ public class Xml2JsonUtil {
                 }
             }
         }
+    }
+
+
+    /**
+     * json转xml
+     * @param json
+     * @param reader
+     * @return
+     * @throws Exception
+     */
+    public static String json2xml(final String json, final JsonXmlReader reader) throws Exception {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        InputSource source = new InputSource(new StringReader(json));
+        Result result = new StreamResult(out);
+        transformer.transform(new SAXSource(reader, source), result);
+        String str = new String(out.toByteArray());
+        return str;
     }
 
     public static boolean isEmpty(String str) {
