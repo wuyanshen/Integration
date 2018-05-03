@@ -13,11 +13,11 @@ import java.util.List;
 
 public class xmltojson {
         public static void main(String[] args) throws Exception {
-            String xmlStr= readFile("C:/test.xml");
+            /*String xmlStr= readFile("C:/test.xml");
             Document doc= DocumentHelper.parseText(xmlStr);
             JSONObject json=new JSONObject();
             dom4j2Json(doc.getRootElement(),json);
-            System.out.println("xml2Json:"+json.toJSONString());
+            System.out.println("xml2Json:"+json.toJSONString());*/
 
             /*String xml = "<?xml version='1.0' encoding='UTF-8'?>\n" +
                     "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
@@ -54,6 +54,21 @@ public class xmltojson {
                     "</soapenv:Envelope>";
             JSONObject json = xml2Json(xml);
             System.out.println("xml2Json:"+json.toJSONString());*/
+
+            String xml = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                    "    xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\n" +
+                    "    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                    "    <soap:Header> </soap:Header>\n" +
+                    "    <soap:Body>\n" +
+                    "        <getOpResultForPackage xmlns=\"http://webservice.elisoft.com/\">\n" +
+                    "            <areanum xmlns=\"\">2</areanum>\n" +
+                    "            <currentPage xmlns=\"\">1</currentPage>\n" +
+                    "            <pageNum xmlns=\"\">10</pageNum>\n" +
+                    "        </getOpResultForPackage>\n" +
+                    "    </soap:Body>\n" +
+                    "</soap:Envelope>";
+            JSONObject json = xml2Json(xml);
+            System.out.println("xml2Json:"+json.toJSONString());
 
         }
 

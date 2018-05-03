@@ -4,6 +4,7 @@
              xmlns:context="http://www.springframework.org/schema/context"
              xmlns="http://www.springframework.org/schema/integration"
              xmlns:int-http="http://www.springframework.org/schema/integration/http"
+             xmlns:ws="http://www.springframework.org/schema/integration/ws"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
                                  http://www.springframework.org/schema/beans/spring-beans.xsd
                                  http://www.springframework.org/schema/context
@@ -12,7 +13,8 @@
                                  http://www.springframework.org/schema/integration/spring-integration.xsd
                                  http://www.springframework.org/schema/integration/http
                                  http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
-                                 ">
+                                 http://www.springframework.org/schema/integration/ws
+			                     http://www.springframework.org/schema/integration/ws/spring-integration-ws.xsd">
 
     <!-- Component scan to find all Spring components -->
     <context:component-scan base-package="com.integration.xml.xml_api" />
@@ -22,15 +24,9 @@
         <queue capacity="10"/>
     </channel>
 
-    <int-http:inbound-gateway request-channel="input"
-                              path="/CommonService"
-                              supported-methods="POST,GET"/>
-    <int-http:outbound-gateway request-channel="input"
-                               url="http://localhost:8092/services/CommonService"
-                               http-method="POST"
-                               expected-response-type="java.lang.String"/>
-    <chain input-channel="input">
-        <!--<header-filter header-names="Content-Type" />-->
-        <service-activator expression="payload +' from other side'"/>
+    <chain input-channel="input" output-channel="output">
+        <ws:outbound-gateway uri="{soapUrl}">
+            <ws:uri-variable name="soapUrl" expression="headers.soapUrl"/>
+        </ws:outbound-gateway>
     </chain>
 </beans:beans>

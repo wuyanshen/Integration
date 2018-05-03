@@ -13,8 +13,8 @@ import java.util.List;
 )
 public interface CommonService {
     @WebMethod
-    @WebResult(name = "String",targetNamespace = "http://service.api.cxf.com")
-    public Country getCountry(@WebParam(name = "name")String name);
+    @WebResult(name = "Country",targetNamespace = "http://service.api.cxf.com")
+    public Country getCountry(@WebParam(name = "name",targetNamespace = "http://service.api.cxf.com")String name);
 
 
     @WebMethod
