@@ -30,11 +30,10 @@ public class EsbWebController {
 //    IntegrationFlow flow1;
 
     @RequestMapping(value = "/call2", method = RequestMethod.POST)
-    public Object call2(@RequestHeader(value = "Content-Type") String ContentType,@RequestHeader String soapAction, @RequestHeader String soapUrl,@RequestHeader String nameSpaceUrl, @RequestBody String reqXml) throws Exception {
+    public Object call2(@RequestHeader(value = "Content-Type") String ContentType,@RequestHeader String soapAction, @RequestHeader String soapUrl, @RequestBody String reqXml) throws Exception {
         MessageBuilder<String> stringMessageBuilder = MessageBuilder.withPayload(reqXml);
         stringMessageBuilder.setHeader(WebServiceHeaders.SOAP_ACTION, soapAction);
         stringMessageBuilder.setHeader("soapUrl", soapUrl);
-        stringMessageBuilder.setHeader("nameSpaceUrl", nameSpaceUrl);
         stringMessageBuilder.setHeader("Content-Type", ContentType);
 
 

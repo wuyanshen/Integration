@@ -8,7 +8,11 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.w3c.dom.NodeList;
 
+import javax.xml.namespace.NamespaceContext;
 import java.util.List;
+
+import static com.elisoft.servicebus.utils.WsdlUtil.getDefinitionDocument;
+import static com.elisoft.servicebus.utils.WsdlUtil.getXpath;
 
 /**
  * 报文协议转换器
@@ -25,19 +29,28 @@ public class EsbTransformer {
             return message;
         }
 
+        String wsdlUrl = message.getHeaders().get("soapUrl").toString()+"?wsdl";
+        //获取wsdl的命名空间
+        org.w3c.dom.Document document = getDefinitionDocument(wsdlUrl);
+        javax.xml.xpath.XPath xpath = getXpath(document);
+        NamespaceContext namespaceContext =  xpath.getNamespaceContext();
+        String namespaceURI = namespaceContext.getNamespaceURI("tns");
+        System.out.println("wsdl的命名空间是："+namespaceURI);
+
         //如果请求报文是json就继续转换
         String result = message.getPayload().toString();
-        String requestXML = Xml2JsonUtil.json2xml(result,new JsonXmlReader(message.getHeaders().get("nameSpaceUrl").toString()));
-        Document document = DocumentHelper.parseText(requestXML);
-        Element element = document.getRootElement();
+        String requestXML = Xml2JsonUtil.json2xml(result,new JsonXmlReader(namespaceURI));
+
+
+        /*Document document1 = DocumentHelper.parseText(requestXML);
+        Element element = document1.getRootElement();
         element = this.getNodes(element);
-//        document.add(element);
-        requestXML = element.getDocument().asXML();
+        requestXML = element.getDocument().asXML();*/
          /*requestXML =
                 "<getOpResultForPackage xmlns=\"http://webservice.elisoft.com/\">\n" +
-                "  <areanum>2</areanum>\n" +
-                "  <currentPage>1</currentPage>\n" +
-                "  <pageNum>10</pageNum>\n" +
+                "  <areanum xmlns=\"\">2</areanum>\n" +
+                "  <currentPage xmlns=\"\">1</currentPage>\n" +
+                "  <pageNum xmlns=\"\">10</pageNum>\n" +
                 "</getOpResultForPackage>";*/
 
         message = MessageBuilder
