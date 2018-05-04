@@ -61,6 +61,15 @@
         </dependency>
         <!--end json转xml用的依赖-->
 
+        <!--start 通过wsdl地址解析wsdl中的内容-->
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <!--end 通过wsdl地址解析wsdl中的内容-->
+
+
         <!-- Java Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>

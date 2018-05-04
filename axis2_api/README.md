@@ -22,3 +22,7 @@
     </soapenv:Envelope>
 ## xml转json工具类
    [博客地址](https://blog.csdn.net/tkggetg/article/details/47784321)
+
+## wsdl解析例子
+    博客中的附件代码已经放在项目中wsdlparse路径中
+   [博客地址](http://zheng12tian.iteye.com/blog/1166505)
