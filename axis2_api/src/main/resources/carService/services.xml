@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 访问地址中的访问那个webservice的名字 -->
 <serviceGroup>
+    <!-- 访问地址中的访问那个webservice的名字 -->
     <service name="CarService">
-        <description>Spring 整合例子 </description>
+        <description>SpringBoot 整合axis2 发布webservice 例子 </description>
+        第一种方式：直接写实现类
+        <parameter name="ServiceClass">com.axis2.api.service.impl.CarServiceImpl</parameter>
+        <!--
+        第二种方式：写接口类，但是需要另外配置SpringBeanName和ServiceObjectSupplier
         <parameter name="ServiceClass">com.axis2.api.service.CarService</parameter>
+        <parameter name="SpringBeanName">carServiceImpl</parameter>
         <parameter name="ServiceObjectSupplier">
             org.apache.axis2.extensions.spring.receivers.SpringServletContextObjectSupplier
-        </parameter>
-        <!-- 配置在applicationContext中配置的bean,,这里的值域bean中的id事一样的，否则就报错找不到bean错 -->
+        </parameter>-->
 
-        <parameter name="SpringBeanName">carServiceImpl</parameter>
         <messageReceivers>
             <messageReceiver mep="http://www.w3.org/ns/wsdl/in-only" class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
             <messageReceiver  mep="http://www.w3.org/ns/wsdl/in-out"  class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
