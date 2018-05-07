@@ -7,8 +7,8 @@ import com.axis2.api.wsdlparse.bean.ParameterInfo;
 import com.axis2.api.wsdlparse.bean.WebServiceMethod;
 import com.axis2.api.wsdlparse.util.SoapUtil;
 import com.axis2.api.wsdlparse.util.WsdlUtil;
-import net.sf.json.JSONArray;
 
+import net.sf.json.JSONArray;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;

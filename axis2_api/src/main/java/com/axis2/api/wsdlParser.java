@@ -22,8 +22,8 @@ import static com.axis2.api.wsdlparse.util.WsdlUtil.getXpath;
  */
 public class wsdlParser {
     public static void main(String[]args) throws Exception {
-        String wsdlUrl = "http://180.76.165.24:8000/elisoft/eliservice?wsdl";
-//        String wsdlUrl = "http://localhost:8092/services/CommonService?wsdl";
+//        String wsdlUrl = "http://180.76.165.24:8000/elisoft/eliservice?wsdl";
+        String wsdlUrl = "http://localhost:8092/services/CommonService?wsdl";
 
 
         //输出wsdl的内容

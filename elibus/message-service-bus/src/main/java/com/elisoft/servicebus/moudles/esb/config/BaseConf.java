@@ -1,6 +1,6 @@
 package com.elisoft.servicebus.moudles.esb.config;
 
-import org.apache.http.protocol.HTTP;
+//import org.apache.http.protocol.HTTP;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.expression.ExpressionParser;
