@@ -4,12 +4,14 @@ import com.axis2.api.entity.Car;
 import com.axis2.api.service.CarService;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.annotation.WebServlet;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@WebServlet(urlPatterns = {"/services/*"})
 @Service
 public class CarServiceImpl implements CarService {
 
