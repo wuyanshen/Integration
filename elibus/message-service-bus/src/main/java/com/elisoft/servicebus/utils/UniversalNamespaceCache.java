@@ -34,10 +34,7 @@ public class UniversalNamespaceCache implements NamespaceContext {
 					examineNode(importDoc.getDocumentElement(), toplevelOnly);
 				}
 			}
-			// System.out.println("The list of the cached namespaces:");
-			// for (String key : prefix2Uri.keySet()) {
-			// System.out.println("prefix " + key + ": uri " + prefix2Uri.get(key));
-			// }
+
 		} catch (Exception e) {
 			throw new RuntimeException("解析wsdl命名空间失败", e);
 		}

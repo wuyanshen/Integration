@@ -13,20 +13,54 @@
 			http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd
 			http://www.springframework.org/schema/integration/ws
 			http://www.springframework.org/schema/integration/ws/spring-integration-ws.xsd">
+	<!--WebService 流程-->
 
-	<int:channel id="wsinputChannel" />
+	<!--加载基础配置-->
+	<beans:import resource="esb-conf-2.xml"/>
 
-	<chain input-channel="wsinputChannel" output-channel="output">
+	<chain input-channel="wsProcessChannel">
+		<!--基础验证-->
+		<int:filter discard-channel="wsBaseFilterDiscardChannel">
+			<beans:bean class="com.elisoft.servicebus.core.filter.ws.WsBaseFilter"/>
+		</int:filter>
+
 		<transformer ref="esbTransformer" method="json2xml"/>
-		<ws:outbound-gateway uri="{reqUrl}" >
+
+		<ws:outbound-gateway uri="{reqUrl}">
 			<ws:uri-variable name="reqUrl" expression="headers.soapUrl"/>
+			<ws:request-handler-advice-chain>
+				<ref bean="retryAdvice" />
+			</ws:request-handler-advice-chain>
 		</ws:outbound-gateway>
-        <transformer ref="esbTransformer" method="xml2json"/>
+
+		<transformer ref="esbTransformer" method="xml2json"/>
+
 	</chain>
 
-	<int:channel id="output">
-		<int:queue capacity="100"/>
-	</int:channel>
+	<beans:bean id="esbTransformer" class="com.elisoft.servicebus.core.transform.EsbTransformer"/>
 
-    <beans:bean id="esbTransformer" class="com.elisoft.servicebus.moudles.esb.config.EsbTransformer"/>
+	<beans:bean id="retryAdvice" class="org.springframework.integration.handler.advice.RequestHandlerRetryAdvice" >
+		<beans:property name="retryTemplate">
+			<beans:bean class="org.springframework.retry.support.RetryTemplate">
+				<beans:property name="backOffPolicy">
+					<beans:bean class="org.springframework.retry.backoff.FixedBackOffPolicy">
+						<beans:property name="backOffPeriod" value="4000" />
+					</beans:bean>
+				</beans:property>
+				<beans:property name="retryPolicy">
+					<beans:bean class="org.springframework.retry.policy.SimpleRetryPolicy">
+						<beans:property name="maxAttempts" value="4" />
+					</beans:bean>
+				</beans:property>
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+
+	<beans:bean id="wsBaseDiscard" class="com.elisoft.servicebus.core.activator.ws.WsBaseFilterDiscard"/>
+	<!--基础验证 丢弃通道-->
+	<int:channel id="wsBaseFilterDiscardChannel" />
+	<int:service-activator input-channel="wsBaseFilterDiscardChannel" ref="wsBaseDiscard" method="base"/>
+
+
 </beans:beans>

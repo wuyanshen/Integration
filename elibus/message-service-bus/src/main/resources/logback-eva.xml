@@ -3,9 +3,9 @@
     <!-- 文件输出格式 -->
     <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n"/>
     <!-- test文件路径 -->
-    <property name="TEST_FILE_PATH" value="C:/"/>
+    <property name="TEST_FILE_PATH" value="/Users/lzj/Work/EliSoft/IDEAWorkSpace/eli-bus/code/0.1/logs/test"/>
     <!-- pro文件路径 -->
-    <property name="PRO_FILE_PATH" value="C:/"/>
+    <property name="PRO_FILE_PATH" value="/Users/lzj/Work/EliSoft/IDEAWorkSpace/eli-bus/code/0.1/logs/pro"/>
     <!-- 开发环境 -->
     <springProfile name="dev">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
