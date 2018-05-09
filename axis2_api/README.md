@@ -152,3 +152,6 @@ public static void main(String[] args) throws MalformedURLException {
     Endpoint :http://www.webxml.com.cn/WebServices/StockInfoWS.asmx
     Disco :http://www.webxml.com.cn/WebServices/StockInfoWS.asmx?disco
     WSDL :http://www.webxml.com.cn/WebServices/StockInfoWS.asmx?wsdl
+
+## XSD相关
+[博客地址](http://www.cnblogs.com/newsouls/archive/2011/10/28/2227765.html)

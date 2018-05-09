@@ -1,0 +1,42 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.api.cxf.com" elementFormDefault="unqualified" targetNamespace="http://service.api.cxf.com" version="1.0">
+    <xs:element name="getAllCountry" type="tns:getAllCountry"/>
+    <xs:element name="getAllCountryResponse" type="tns:getAllCountryResponse"/>
+    <xs:element name="getCountry" type="tns:getCountry"/>
+    <xs:element name="getCountryResponse" type="tns:getCountryResponse"/>
+    <xs:complexType name="getCountry">
+        <xs:sequence>
+            <xs:element form="qualified" minOccurs="0" name="name" type="xs:string"/>
+
+        </xs:sequence>
+
+    </xs:complexType>
+    <xs:complexType name="getCountryResponse">
+        <xs:sequence>
+            <xs:element form="qualified" minOccurs="0" name="Country" type="tns:country"/>
+
+        </xs:sequence>
+
+    </xs:complexType>
+    <xs:complexType name="country">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="capital" type="xs:string"/>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+            <xs:element minOccurs="0" name="population" type="xs:string"/>
+
+        </xs:sequence>
+
+    </xs:complexType>
+    <xs:complexType name="getAllCountry">
+        <xs:sequence/>
+
+    </xs:complexType>
+    <xs:complexType name="getAllCountryResponse">
+        <xs:sequence>
+            <xs:element form="qualified" maxOccurs="unbounded" minOccurs="0" name="Country" type="tns:country"/>
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+
+</xs:schema>

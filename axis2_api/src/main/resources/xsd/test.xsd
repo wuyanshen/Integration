@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.w3schools.com"
+           xmlns="http://www.w3schools.com"
+           elementFormDefault="qualified">
+
+    <!--简单类型-->
+    <xs:element name="username" type="xs:string" default="admin">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:minLength value="6"/>
+                <xs:maxLength value="20"/>
+                <xs:pattern value="lucy|xiaoming"/>
+                <xs:whiteSpace value="replace"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!--简单类型-->
+    <xs:element name="password" default="123456">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:minLength value="5"/>
+                <xs:maxLength value="8"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <!--只包含子元素的复杂类型-->
+    <xs:element name="person">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--只包含属性的复杂类型-->
+    <xs:element name="product" type="productType"/>
+    <xs:complexType name="productType">
+        <xs:attribute name="prodID" type="xs:positiveInteger"/>
+    </xs:complexType>
+    
+    <xs:element name=""
+
+</xs:schema>
