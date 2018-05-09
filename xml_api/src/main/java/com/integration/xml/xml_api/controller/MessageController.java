@@ -1,5 +1,6 @@
 package com.integration.xml.xml_api.controller;
 
+import com.integration.xml.xml_api.gateway.EsbGateWay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.Message;
@@ -8,9 +9,14 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/esb")
 public class MessageController {
+    @Autowired
+    private EsbGateWay esbGateWay;
 
     @Autowired
     private MessageChannel input;
@@ -31,4 +37,14 @@ public class MessageController {
         System.out.println(message.getPayload().toString());
         return message.getPayload().toString();
     }
+
+    @PostMapping("/call2")
+    public Object sendMessage(@RequestHeader String soapAction,@RequestHeader String soapUrl,@RequestBody String payload){
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("ws-soapAction",soapAction);
+        map.put("sopaUrl",soapUrl);
+        Object msg = esbGateWay.httpRequest(payload,map);
+        return msg;
+    }
+
 }
