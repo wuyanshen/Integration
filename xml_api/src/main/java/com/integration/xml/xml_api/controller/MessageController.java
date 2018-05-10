@@ -38,6 +38,7 @@ public class MessageController {
         return message.getPayload().toString();
     }
 
+
     @PostMapping("/call2")
     public Object sendMessage(@RequestHeader String soapAction,@RequestHeader String soapUrl,@RequestBody String payload){
         Map<String,String> map = new HashMap<String,String>();
