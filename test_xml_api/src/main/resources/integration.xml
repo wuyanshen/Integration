@@ -3,6 +3,7 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:int="http://www.springframework.org/schema/integration"
              xmlns:ws="http://www.springframework.org/schema/integration/ws"
+             xmlns:stream="http://www.springframework.org/schema/integration/stream"
              xmlns:int-http="http://www.springframework.org/schema/integration/http"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
                                  http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -10,33 +11,28 @@
                                  http://www.springframework.org/schema/integration/spring-integration.xsd
                                  http://www.springframework.org/schema/integration/ws
 			                     http://www.springframework.org/schema/integration/ws/spring-integration-ws.xsd
+                                 http://www.springframework.org/schema/integration/stream
+                                 http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd
                                  http://www.springframework.org/schema/integration/http
                                  http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
 
     <!-- Component scan to find all Spring components -->
     <!--<context:component-scan base-package="com.integration.xml.xml_api" />-->
-
-    <int:channel id="requestChannel" />
-    <int:channel id="outputChannel">
+    <!--<int:poller default="true" fixed-delay="50"/>-->
+    <int:channel id="wsinputChannel" />
+   <!-- <int:channel id="output">
         <int:queue capacity="10"/>
-    </int:channel>
-    <!--<int-http:inbound-gateway request-channel="requestChannel" reply-channel="outputChannel"
-                              path="/welcome/{name}"
-                              supported-methods="GET"
-                              payload-expression="#pathVariables.name">
-        <int-http:request-mapping consumes="application/json" produces="application/json"/>
-    </int-http:inbound-gateway>-->
-    <!--<int-http:outbound-gateway http-method="GET" url="http://localhost:8080/getMsg" request-channel="requestChannel" reply-channel="outputChannel" >
-    </int-http:outbound-gateway>-->
-    <!--<int:service-activator ref="welcomeEndpoint"
-                               method="get" input-channel="requestChannel" output-channel="outputChannel" />-->
-    <int:chain input-channel="requestChannel" output-channel="outputChannel">
-        <ws:header-enricher>
-            <ws:soap-action value="http://localhost:8092/services/CommonService"/>
-        </ws:header-enricher>
-        <ws:inbound-gateway request-channel="requestChannel" reply-channel="outputChannel"/>
-        <ws:outbound-gateway uri="http://localhost:8080/getMsg"/>
-        <int:service-activator  expression="payload+' 哈哈哈'"  />
+    </int:channel>-->
+
+    <int:chain input-channel="wsinputChannel">
+        <ws:outbound-gateway uri="{reqUrl}">
+            <ws:uri-variable name="reqUrl" expression="headers.soapUrl"/>
+        </ws:outbound-gateway>
+        <!--控制台输出-->
+        <stream:stdout-channel-adapter id="consoleOut"/>
     </int:chain>
+
+
+
 
 </beans:beans>

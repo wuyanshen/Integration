@@ -44,7 +44,7 @@
 
     <chain input-channel="gatewayInputChannel" output-channel="routingChannel">
         <filter id="authenticate" discard-channel="authenticationDiscardChannel">
-            <beans:bean class="com.integration.xml.xml_api."
+            <!--<beans:bean class="com.integration.xml.xml_api.gateway."-->
         </filter>
         <ws:outbound-gateway uri="{soapUrl}">
             <ws:uri-variable name="soapUrl" expression="headers.soapUrl"/>
